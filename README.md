@@ -49,6 +49,15 @@ In order to empty the contract in one transaction, we can create an attacker con
 
 ## 3 - Truster
 
+Here we have to get all the tokens from the pool, and our starter balance is 0.
+
+The `flashLoan` from the pool lets us call any function in any contract. So, what we can do is:
+
+- Call the `flashLoan` with a function to `approve` the pool's tokens to be used by the attacker
+- Call the `transferFrom` function of the token, to transfer them to the attacker address
+
+If we want to make it in one transaction, we can create a contract that calls the `flashLoan` with the `approve`, but instead of the attacker address, we set the created contract address. Then we transfer the tokens to the attacker in the same tx.
+
 [Test](./test/truster/truster.challenge.ts)
 
 ## 4 - Side entrance
