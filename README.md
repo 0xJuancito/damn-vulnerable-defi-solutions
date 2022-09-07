@@ -22,6 +22,19 @@ Solutions to [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/) CTF cha
 
 ## 1 - Unstoppable
 
+The goal of the first challenge is to perform a DOS (Denial of Service) attack to the contract.
+
+There is a suspicious line in the `flashLoan` function:
+
+```solidity
+uint256 balanceBefore = damnValuableToken.balanceOf(address(this));
+assert(poolBalance == balanceBefore);
+```
+
+If we can manage to alter the `poolBalance` or the `balanceBefore`, we will achieve the goal.
+
+We can easily modify the `balanceBefore` by sending some token to the pool.
+
 [Test](./test/unstoppable/unstoppable.challenge.ts)
 
 ## 2 - Naive receiver
