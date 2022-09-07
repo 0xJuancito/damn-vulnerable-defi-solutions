@@ -39,6 +39,12 @@ We can easily modify the `balanceBefore` by sending some token to the pool.
 
 ## 2 - Naive receiver
 
+In this challenge we have to drain all the funds from a contract made to call flash loans.
+
+The contract expects to be called from the pool, which is fine, but the vulnerability lies on the fact that anyone can call the flash loan function of the pool.
+
+In order to empty the contract in one transaction, we can create an attacker contract that calls the flash loan multiple times.
+
 [Test](./test/naive-receiver/naive-receiver.challenge.ts)
 
 ## 3 - Truster
