@@ -62,6 +62,12 @@ If we want to make it in one transaction, we can create a contract that calls th
 
 ## 4 - Side entrance
 
+For this challenge we have to take all the ETH from the pool contract.
+
+It has no function to receive ETH, other than the `deposit`, which is also the attack vector.
+
+We can create an attacker contract that asks for a flash loan, and then deposit the borrowed ETH. The pool will believe that our balance is 1000 ETH, and that the flash loan was properly paid. Then we can withdraw it.
+
 [Test](./test/side-entrance/side-entrance.challenge.ts)
 
 ## 5 - The rewarder
