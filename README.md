@@ -72,6 +72,19 @@ We can create an attacker contract that asks for a flash loan, and then deposit 
 
 ## 5 - The rewarder
 
+Here we have to claim rewards from a pool we shouldn't be able to.
+
+Rewards are distributed when someone calls `distributeRewards()`, and depending on the amount of tokens deposited.
+
+So, we can do all of this in one transaction:
+
+0. Wait five days (minimum period between rewards)
+1. Get a flash loan with a huge amount of tokens
+2. Deposit the tokens in the pool
+3. Distribute the rewards
+4. Withdraw the tokens from the pool
+5. Pay back the flash loan
+
 [Test](./test/the-rewarder/the-rewarder.challenge.ts)
 
 ## 6 - Selfie
