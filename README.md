@@ -140,6 +140,16 @@ With these keys, we can manipulate the price of the token to buy low and sell hi
 
 ## 8 - Puppet
 
+The goal of this challenge is to drain all of the tokens from a pool.
+
+There's a `borrow` function in the pool that lets people borrow tokens for twice their price in ETH.
+
+The vulnerability lies on the fact that it is taking the price from a Uniswap pool with very low liquidity.
+
+So, we can lower the token price of the Uniswap pool by swapping some ETH to tokens.
+
+Then, when the price is low enough, we can borrow all the tokens from the pool for a very low price.
+
 [Test](./test/puppet/puppet.challenge.ts)
 
 ## 9 - Puppet v2
