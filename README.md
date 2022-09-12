@@ -89,6 +89,17 @@ So, we can do all of this in one transaction:
 
 ## 6 - Selfie
 
+The goal of this challenge is to drain all the tokens from the pool.
+
+The pool has a `drainAllFunds(address)` function that can only be executed by a _governance_ address, and this is what we will be exploiting:
+
+1. Request a flash loan and get all the tokens from the pool
+2. Take a `snapshot` of the tokens -> Here lies one vulnerability. Anyone can take a snapshot at any time
+3. Propose to execute an action to transfer all tokens to the attacker (the proposal will be admited since we have a lot of tokens in the snapshot)
+4. Return the flash loan tokens to the pool
+5. Wait two days (the grace period for the proposal)
+6. Execute the action to drain all funds
+
 [Test](./test/selfie/selfie.challenge.ts)
 
 ## 7 - Compromised
