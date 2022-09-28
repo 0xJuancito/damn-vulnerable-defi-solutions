@@ -188,6 +188,18 @@ await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE);
 
 ## 11 - Backdoor
 
+The goal of this challenge is to take all the tokens from a Gnosis Safe wallet.
+
+The proxy wallets haven't been initialized. So, it may be possible to execute some code to exploit that.
+
+If we create a proxy wallet with `GnosisSafeProxyFactory.createProxyWithCallback`, it initializes the wallet internally, and it is possible to execute code in the context of the proxy (using its storage).
+
+When the proxy wallet is initialized, it calls the `WalletRegistry.proxyCreated` function. That function has a lot of requirements to prevent it being executed by anyone except for the master copy of the wallet contract, plus other validations, making it impossible to transfer the tokens tricking it.
+
+But, what we can do is initialize the wallet with an initializer that calls another contract that approves and spender to use the tokens. It uses the proxy context, so it allows its own tokens.
+
+Then after the proxy is created and initialized, we can simply transfer the tokens, as we have previously set our address to be the spender.
+
 [Test](./test/backdoor/backdoor.challenge.ts)
 
 ## 12 - Climber
