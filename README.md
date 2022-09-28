@@ -193,7 +193,3 @@ await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE);
 ## 12 - Climber
 
 [Test](./test/climber/climber.challenge.ts)
-
-## 13 - Safe miners
-
-[Test](./test/safe-miners/safe-miners.challenge.ts)
