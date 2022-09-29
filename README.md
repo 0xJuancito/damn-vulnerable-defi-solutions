@@ -184,6 +184,30 @@ await this.lendingPool.connect(attacker).borrow(POOL_INITIAL_TOKEN_BALANCE);
 
 ## 10 - Free rider
 
+The goal of this challenge is to send some NFTs from a vulnerable marketplace to a buyer.
+
+The marketplace contract has a bug here:
+
+```solidity
+// transfer from seller to buyer
+token.safeTransferFrom(token.ownerOf(tokenId), msg.sender, tokenId);
+
+// pay seller
+payable(token.ownerOf(tokenId)).sendValue(priceToPay);
+```
+
+It was supposed to be paying the seller, but in reality, it is paying the new owner, which is the buyer.
+
+On top of that it has another bug. If you buy multiple NFTs, you only have to pay for one:
+
+```solidity
+require(msg.value >= priceToPay, "Amount paid is not enough");
+```
+
+That line is executed multiple times, but with the same `msg.value`.
+
+The only thing we need to do to perform the attack is get a flash loan from Uniswap, and repay it after getting the reward.
+
 [Test](./test/free-rider/free-rider.challenge.ts)
 
 ## 11 - Backdoor
