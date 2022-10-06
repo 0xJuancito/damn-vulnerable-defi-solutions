@@ -18,7 +18,6 @@ Solutions to [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/) CTF cha
 10. [Free rider](#10-free-rider)
 11. [Backdoor](#11-backdoor)
 12. [Climber](#12-climber)
-13. [Safe miners](#13-safe-miners)
 
 ## 1 - Unstoppable
 
@@ -227,5 +226,15 @@ Then after the proxy is created and initialized, we can simply transfer the toke
 [Test](./test/backdoor/backdoor.challenge.ts)
 
 ## 12 - Climber
+
+The goal of this challenge is to empty the vault.
+
+The `schedule` function does not work as expected an is vulnerable to an attack. It first executes the tasks and later checks if they were previously scheduled. So we can use this for our advantage.
+
+We must perform a series of tasks to empty the vault: First we have to set the `ClimberTimelock` `delay` to 0 and grant the `proposer` role to the attacker contract. Then we can transfer the ownership of the contract to the attacker. All of this must be done via tasked passed to the contract function.
+
+We can then upgrade the contract to a new version that modifies the `sweepFunds` function to allow the attacker to call it.
+
+Call the sweep and it's done.
 
 [Test](./test/climber/climber.challenge.ts)

