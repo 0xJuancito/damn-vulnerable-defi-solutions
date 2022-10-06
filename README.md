@@ -4,18 +4,18 @@ Solutions to [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/) CTF cha
 
 ## Contents
 
-1.  [Unstoppable](#1-unstoppable)
-2.  [Naive receiver](#2-naive-receiver)
-3.  [Truster](#3-truster)
-4.  [Side entrance](#4-side-entrance)
-5.  [The rewarder](#5-the-rewarder)
-6.  [Selfie](#6-selfie)
-7.  [Compromised](#7-compromised)
-8.  [Puppet](#8-puppet)
-9.  [Puppet v2](#9-puppet-v2)
-10. [Free rider](#10-free-rider)
-11. [Backdoor](#11-backdoor)
-12. [Climber](#12-climber)
+1.  [Unstoppable](#1---unstoppable)
+2.  [Naive receiver](#2---naive-receiver)
+3.  [Truster](#3---truster)
+4.  [Side entrance](#4---side-entrance)
+5.  [The rewarder](#5---the-rewarder)
+6.  [Selfie](#6---selfie)
+7.  [Compromised](#7---compromised)
+8.  [Puppet](#8---puppet)
+9.  [Puppet v2](#9---puppet-v2)
+10. [Free rider](#10---free-rider)
+11. [Backdoor](#11---backdoor)
+12. [Climber](#12---climber)
 
 ## 1 - Unstoppable
 
