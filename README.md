@@ -1,4 +1,4 @@
-# Damn Vulnerable DeFi Writeup
+# Damn Vulnerable DeFi Solutions
 
 Solutions to [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/) CTF challenges ⛳️
 
