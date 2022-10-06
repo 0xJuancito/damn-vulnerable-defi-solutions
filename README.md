@@ -1,7 +1,5 @@
 # Damn Vulnerable DeFi Writeup
 
-🚧 WIP
-
 Solutions to [Damn Vulnerable DeFi](https://www.damnvulnerabledefi.xyz/) CTF challenges ⛳️
 
 ## Contents
