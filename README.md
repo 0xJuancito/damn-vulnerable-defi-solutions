@@ -225,6 +225,8 @@ Then after the proxy is created and initialized, we can simply transfer the toke
 
 ## 12 - Climber
 
+Solution from [this post](https://medium.com/@balag3/damn-vulnerable-defi-walkthrough-part-two-challenge-7-12-a64c42c82c5b)
+
 The goal of this challenge is to empty the vault.
 
 The `schedule` function does not work as expected an is vulnerable to an attack. It first executes the tasks and later checks if they were previously scheduled. So we can use this for our advantage.
